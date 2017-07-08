@@ -2,6 +2,15 @@
 
 set -e
 
+# In macOS, readlink has no option "-f"
+# Alternate, use GNU readlink in coreutils
+# How to install
+# brew install coreutils
+# sudo port install coreutils
+if [ `uname` = "Darwin" ]; then 
+  alias readlink=greadlink
+fi
+
 script_dir=$(dirname $(readlink -f "$0"))
 
 build_dir="$1"
